@@ -1,6 +1,9 @@
 package org.usfirst.frc.equipe5910.robot;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.VictorSP;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -9,8 +12,18 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
+
 public class RobotControleur extends IterativeRobot {
 
+	VictorSP moteurBrasseurGauche;
+	CANTalon moteurBrasseurDroit;
+	
+	public static final int BRASSEUR_GAUCHE = 16; // SP 8
+	public static final boolean INVERSION_BRASSEUR_GAUCHE = false;
+	public static final int BRASSEUR_DROIT = 4;
+	public static final boolean INVERSION_BRASSEUR_DROIT = false;
+
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -19,6 +32,10 @@ public class RobotControleur extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		System.out.println("robotInit()");
+		moteurBrasseurGauche = new VictorSP(BRASSEUR_GAUCHE);
+		moteurBrasseurGauche.setInverted(INVERSION_BRASSEUR_GAUCHE);		
+		moteurBrasseurDroit = new CANTalon(BRASSEUR_DROIT);
+		moteurBrasseurDroit.setInverted(INVERSION_BRASSEUR_DROIT);
 	}
 
 	/**
@@ -27,6 +44,9 @@ public class RobotControleur extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		System.out.println("autonomousInit()");
+		// brasser en sens horaire
+		moteurBrasseurGauche.set(-1);
+		moteurBrasseurDroit.set(-1);
 	}
 
 	/**
@@ -44,6 +64,9 @@ public class RobotControleur extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		System.out.println("teleopInit()");
+		// brasser en sens anti-horaire
+		moteurBrasseurGauche.set(1);
+		moteurBrasseurDroit.set(1);
 	}
 
 	/**
