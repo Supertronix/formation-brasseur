@@ -78,6 +78,7 @@
 		<fileset file="lib/NetworkTables.jar"/>
 		<fileset file="lib/opencv.jar"/>
 		<fileset file="lib/cscore.jar"/>
+		<fileset file="lib/CTRLib.jar"/>
 		<fileset dir="${userLibs}" erroronmissingdir="false"/>
 	</path>
 
